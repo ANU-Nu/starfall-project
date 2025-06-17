@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ข้อความกลางจอพร้อมอิโมจิลอยเต็ม</title>
+<style>
+  body {
+    margin: 0; padding: 0; height: 100vh; overflow: hidden;
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7, #ce93d8, #ba68c8);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  /* ข้อความอยู่กลางจอ */
+  .center-text {
+    position: relative;
+    font-size: 2.5em;
+    font-weight: bold;
+    max-width: 90vw;
+    text-align: center;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 10;
+    user-select: none;
+  }
+
+  /* ตัวการ์ตูนอิโมจิลอยขึ้น */
+  .emoji {
+    position: absolute;
+    bottom: 0;
+    font-size: 50px;
+    animation: floatUp 8s linear forwards;
+    user-select: none;
+    pointer-events: none;
+  }
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+  }
+
+  /* ดาวหัวใจตก */
+  .heart {
+    position: absolute;
+    width: 25px; height: 25px;
+    background: red;
+    transform: rotate(45deg);
+    animation: float 7s linear infinite;
+    z-index: 5;
+  }
+  .heart:before, .heart:after {
+    content: '';
+    position: absolute;
+    width: 25px; height: 25px;
+    background: red;
+    border-radius: 50%;
+  }
+  .heart:before {
+    top: -12.5px; left: 0;
+  }
+  .heart:after {
+    left: -12.5px; top: 0;
+  }
+  @keyframes float {
+    0% {transform: translateY(100vh) rotate(45deg); opacity: 1;}
+    100% {transform: translateY(-20vh) rotate(45deg); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ข้อความกลางจอ -->
+<div class="center-text">
+  Life without love is like a tree without fruit.<br>
+  (ชีวิตที่ไม่มีความรักก็เหมือนต้นไม้ที่ไม่มีผล)
+</div>
+
+<script>
+  const emojis = ['😊', '😉', '😘', '😁', '😍', '🥰', '😇', '🤩', '🤗', '😻', '💖', '💘', '💕']; 
+
+  // สร้างอิโมจิลอยขึ้นแบบจำนวนเยอะขึ้น
+  function createEmoji() {
+    const emoji = document.createElement('div');
+    emoji.classList.add('emoji');
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.fontSize = (20 + Math.random() * 50) + 'px'; // ขนาดสุ่ม 20-70px
+    emoji.style.animationDuration = (5 + Math.random() * 5) + 's'; // ความเร็วสุ่ม 5-10 วินาที
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 10000);
+  }
+
+  // สร้างดาวหัวใจตก
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+
+  // สร้างอิโมจิเยอะขึ้น
+  setInterval(createEmoji, 200); // ทุก 0.2 วิ สร้างอิโมจิใหม่
+  setInterval(createHeart, 250); // ดาวหัวใจตกเหมือนเดิม
+</script>
+
+</body>
+</html>
