@@ -1,16 +1,15 @@
-const emojiContainer = document.getElementById('emojiContainer');
-const emojis = ['💖','❤️','💕','💘'];
-const screenWidth = window.innerWidth;
+const emojis = ['💖', '❤️', '💕', '💘', '😍', '😘', '💓'];
+const emojiContainer = document.body;
 
 function createEmoji() {
-  const e = document.createElement('div');
-  e.classList.add('emoji');
-  e.style.left = Math.random() * screenWidth + 'px';
-  e.style.animationDuration = (Math.random() * 3 + 3) + 's';
-  e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-  emojiContainer.appendChild(e);
+    const emoji = document.createElement('div');
+    emoji.classList.add('emoji');
+    emoji.style.left = Math.random() * window.innerWidth + 'px';
+    emoji.style.animationDuration = (Math.random() * 3 + 4) + 's';
+    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    emojiContainer.appendChild(emoji);
 
-  setTimeout(() => e.remove(), 7000);
+    setTimeout(() => emoji.remove(), 7000);
 }
 
-setInterval(createEmoji, 100);
+setInterval(createEmoji, 150);
