@@ -1,62 +1,88 @@
-/* ไล่เฉดสีพื้นหลัง RGB */
+/* ไล่เฉดสีพื้นหลัง RGB เคลื่อนไหว */
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: linear-gradient(270deg, #ff0000, #00ff00, #0000ff, #ffff00);
-    background-size: 800% 800%;
-    animation: backgroundShift 20s ease infinite;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(270deg, #ff0000, #00ff00, #0000ff, #ffff00);
+  background-size: 800% 800%;
+  animation: backgroundShift 20s ease infinite;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
 }
 
 @keyframes backgroundShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .text {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 40px;
-    text-align: center;
-    animation: blink 1s infinite alternate;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0,0,0,0.7);
+  animation: blink 1.5s infinite alternate;
+  z-index: 10;
 }
 
 @keyframes blink {
-    0% { opacity: 1; }
-    100% { opacity: 0.7; }
+  0% { opacity: 1; }
+  100% { opacity: 0.7; }
 }
 
 .moving-image {
-    position: absolute;
-    width: 150px; /* ปรับขนาดรูปครึ่งหนึ่ง */
-    animation: moveAround 6s ease-in-out infinite alternate;
+  position: absolute;
+  width: 150px;
+  animation: moveAround 6s ease-in-out infinite alternate;
+  z-index: 10;
 }
 
 .moving-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 @keyframes moveAround {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* อิโมจิหัวใจตก */
+#emoji-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5;
 }
 
 .emoji {
-    position: absolute;
-    font-size: 30px;
-    user-select: none;
-    pointer-events: none;
-    animation: fall linear infinite;
+  position: absolute;
+  font-size: 30px;
+  user-select: none;
+  pointer-events: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
