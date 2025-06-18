@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(45deg, #000000, #1a1a1a);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.cartoons {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cartoon {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+}
