@@ -1,44 +1,16 @@
-const canvas = document.getElementById('heartCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const emojiContainer = document.getElementById('emojiContainer');
+const emojis = ['💖','❤️','💕','💘'];
+const screenWidth = window.innerWidth;
 
-let hearts = [];
+function createEmoji() {
+  const e = document.createElement('div');
+  e.classList.add('emoji');
+  e.style.left = Math.random() * screenWidth + 'px';
+  e.style.animationDuration = (Math.random() * 3 + 3) + 's';
+  e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+  emojiContainer.appendChild(e);
 
-for (let i = 0; i < 100; i++) {
-    hearts.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 2,
-        speed: Math.random() * 3 + 1,
-        color: `hsl(${Math.random() * 360}, 100%, 70%)`
-    });
+  setTimeout(() => e.remove(), 7000);
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    hearts.forEach(heart => {
-        ctx.beginPath();
-        ctx.arc(heart.x, heart.y, heart.size, 0, Math.PI * 2);
-        ctx.fillStyle = heart.color;
-        ctx.fill();
-    });
-    move();
-}
-
-function move() {
-    hearts.forEach(heart => {
-        heart.y += heart.speed;
-        if (heart.y > canvas.height) {
-            heart.y = 0;
-            heart.x = Math.random() * canvas.width;
-        }
-    });
-}
-
-function animate() {
-    draw();
-    requestAnimationFrame(animate);
-}
-
-animate();
+setInterval(createEmoji, 100);
